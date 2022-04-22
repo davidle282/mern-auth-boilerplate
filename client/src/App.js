@@ -2,6 +2,7 @@ import { UserOutlined } from "@ant-design/icons";
 import { Layout, Menu, message } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import { BrowserRouter, Link, Route, Routes } from "react-router-dom";
+import logo from "./assets/images/logo.png";
 import Auth from "./Auth";
 import ChangePassword from "./containers/ChangePassword";
 import ForgotPassord from "./containers/ForgotPassord";
@@ -32,21 +33,12 @@ function App() {
   const renderHeader = () => {
     const fullName = `${auth?.data?.firstName} ${auth?.data?.lastName}`;
     return (
-      <Header>
-        <div
-          style={{
-            float: "left",
-            width: 120,
-            height: 30,
-            marginTop: 16,
-            marginRight: 16,
-            background: "gray",
-          }}
-        />
+      <Header className="app-header">
+        <img src={logo} className="app-logo" />
         <Menu
-          theme="dark"
+          theme="light"
           mode="horizontal"
-          defaultSelectedKeys={["home"]}
+          defaultSelectedKeys={["login"]}
           onClick={handleLogout}
         >
           <Menu.Item key="home">
@@ -58,7 +50,9 @@ function App() {
               icon={<UserOutlined />}
               title={`Hi ${fullName}`}
             >
-              <Menu.Item key="changePassword"><Link to='changePassword'>Change Password</Link></Menu.Item>
+              <Menu.Item key="changePassword">
+                <Link to="changePassword">Change Password</Link>
+              </Menu.Item>
               <Menu.Item key="logout">Logout</Menu.Item>
             </SubMenu>
           ) : (
@@ -80,13 +74,27 @@ function App() {
     <BrowserRouter>
       <Layout>
         {renderHeader()}
-        <Content style={{ padding: "0 50px", marginTop: 20 }}>
-          <div style={{ padding: 24, background: "#fff", height: "80vh" }}>
+        <Content className="app-content">
+          <div className="app-wrapper">
             <Routes>
-              <Route path="/" element={<Auth><Home /></Auth>} />
+              <Route
+                path="/"
+                element={
+                  <Auth>
+                    <Home />
+                  </Auth>
+                }
+              />
               <Route path="/forgotPassword" element={<ForgotPassord />} />
               <Route path="/resetPassword/:token" element={<ResetPassword />} />
-              <Route path="/changePassword" element={<Auth authRoute={true} redirectTo='/login'><ChangePassword/></Auth>}/>
+              <Route
+                path="/changePassword"
+                element={
+                  <Auth authRoute={true} redirectTo="/login">
+                    <ChangePassword />
+                  </Auth>
+                }
+              />
               <Route
                 path="/login"
                 element={
