@@ -9,10 +9,16 @@
   }
 }
 
+@media screen and (max-device-width: 768px) {
+  .ant-layout-header {
+    padding: 0 !important;
+  }
+}
+
 .app-wrapper {
   background: #fff;
   padding-bottom: 20px;
-  height: 86vh;
+  min-height: 86vh;
 }
 
 .app-logo {

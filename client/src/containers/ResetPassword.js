@@ -20,7 +20,8 @@ function ResetPassword() {
     });
   };
   return (
-    <Row justify="center" style={{ minHeight: "100vh" }}>
+    <div className="page-wrapper">
+      <Row justify="center">
       <Col xs={24} sm={16} md={12} lg={8} xl={6} xxl={6}>
         <h2>Reset Password</h2>
         <Form
@@ -78,6 +79,7 @@ function ResetPassword() {
         </Form>
       </Col>
     </Row>
+    </div>
   );
 }
 

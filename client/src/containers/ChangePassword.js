@@ -21,77 +21,79 @@ function ChangePassword() {
     });
   };
   return (
-    <Row justify="center" style={{ minHeight: "100vh" }}>
-      <Col xs={24} sm={16} md={12} lg={8} xl={6} xxl={6}>
-        <h2>Change Password</h2>
-        <Form
-          form={form}
-          name="changePassword"
-          layout="vertical"
-          onFinish={onFinish}
-          scrollToFirstError
-        >
-          <Form.Item
-            name="oldPassword"
-            label="Old Password"
-            rules={[
-              {
-                required: true,
-                message: "Please input your old password!",
-              },
-            ]}
+    <div className="page-wrapper">
+      <Row justify="center" style={{ minHeight: "100vh" }}>
+        <Col xs={24} sm={16} md={12} lg={8} xl={6} xxl={6}>
+          <h2>Change Password</h2>
+          <Form
+            form={form}
+            name="changePassword"
+            layout="vertical"
+            onFinish={onFinish}
+            scrollToFirstError
           >
-            <Input.Password />
-          </Form.Item>
-
-          <Form.Item
-            name="password"
-            label="New Password"
-            rules={[
-              {
-                required: true,
-                message: "Please input your new password!",
-              },
-            ]}
-            hasFeedback
-          >
-            <Input.Password />
-          </Form.Item>
-          <Form.Item
-            name="confirm"
-            label="Confirm New Password"
-            dependencies={["password"]}
-            rules={[
-              {
-                required: true,
-                message: "Please confirm your new password!",
-              },
-              ({ getFieldValue }) => ({
-                validator(_, value) {
-                  if (!value || getFieldValue("password") === value) {
-                    return Promise.resolve();
-                  }
-
-                  return Promise.reject(
-                    new Error(
-                      "The two passwords that you entered do not match!"
-                    )
-                  );
+            <Form.Item
+              name="oldPassword"
+              label="Old Password"
+              rules={[
+                {
+                  required: true,
+                  message: "Please input your old password!",
                 },
-              }),
-            ]}
-            hasFeedback
-          >
-            <Input.Password />
-          </Form.Item>
-          <Form.Item>
-            <Button type="primary" htmlType="submit">
-              Change Password
-            </Button>
-          </Form.Item>
-        </Form>
-      </Col>
-    </Row>
+              ]}
+            >
+              <Input.Password />
+            </Form.Item>
+
+            <Form.Item
+              name="password"
+              label="New Password"
+              rules={[
+                {
+                  required: true,
+                  message: "Please input your new password!",
+                },
+              ]}
+              hasFeedback
+            >
+              <Input.Password />
+            </Form.Item>
+            <Form.Item
+              name="confirm"
+              label="Confirm New Password"
+              dependencies={["password"]}
+              rules={[
+                {
+                  required: true,
+                  message: "Please confirm your new password!",
+                },
+                ({ getFieldValue }) => ({
+                  validator(_, value) {
+                    if (!value || getFieldValue("password") === value) {
+                      return Promise.resolve();
+                    }
+
+                    return Promise.reject(
+                      new Error(
+                        "The two passwords that you entered do not match!"
+                      )
+                    );
+                  },
+                }),
+              ]}
+              hasFeedback
+            >
+              <Input.Password />
+            </Form.Item>
+            <Form.Item>
+              <Button type="primary" htmlType="submit">
+                Change Password
+              </Button>
+            </Form.Item>
+          </Form>
+        </Col>
+      </Row>
+    </div>
   );
 }
 
